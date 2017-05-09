@@ -50,6 +50,7 @@
     "start.ios": "npm run nativescript-install && gulp build.tns && concurrently --kill-others 'gulp build.tns.watch' 'cd nativescript && tns run ios --emulator'",
     "start.ios.device": "npm run nativescript-install && gulp build.tns && concurrently --kill-others 'gulp build.tns.watch' 'cd nativescript && tns run ios'",
     "start.android": "npm run nativescript-install && gulp build.tns && concurrently --kill-others \"gulp build.tns.watch\" \"cd nativescript && tns livesync android --emulator\"",
+    "start.android.debug": "npm run nativescript-install && gulp build.tns && concurrently --kill-others \"gulp build.tns.watch\" \"cd nativescript && tns debug android --debug-brk --emulator\"",
     "start.android.device": "npm run nativescript-install && gulp build.tns && concurrently --kill-others \"gulp build.tns.watch\" \"cd nativescript && tns run android\"",
     "tasks.list": "gulp --tasks-simple --color",
     "test": "gulp test --color",
@@ -192,6 +193,7 @@
     "reflect-metadata": "^0.1.8",
     "rxjs": "~5.2.0",
     "systemjs": "0.19.41",
-    "zone.js": "^0.8.4"
+    "zone.js": "^0.8.4",
+    "tns-core-modules": "^3.0.0"
   }
 }

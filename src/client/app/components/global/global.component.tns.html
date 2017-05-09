@@ -2,7 +2,20 @@
   <ActivityIndicator row="1" *ngIf="isLoading" class="activity-indicator" width="100" height="100" #activityIndicator
                      busy="{{ isLoading }}"></ActivityIndicator>
   <StackLayout *ngIf="!isLoading">
-    <SegmentedBar class="m-5" #sb [items]="FNVolDsk" (selectedIndexChange)="segmentedBarselectionChange(sb.selectedIndex)"></SegmentedBar>
-    <Label [text]="lblProp" textWrap="true" vertical-align="center" class="h2 p-15 text-center"></Label>
+    <SegmentedBar class="m-5" #sb [items]="FNVolDsk"
+                  (selectedIndexChange)="segmentedBarselectionChange(sb.selectedIndex)"></SegmentedBar>
+    <StackLayout class="CardStyle">
+      <StackLayout  orientation="vertical" class="volLstwrapper" height="150" backgroundColor="#d4f1ff" *ngFor="let vol of FNVolDskInfo">
+          <Label horizontalAlignment="center"  class="volName" [text]="vol.name"></Label>
+        <StackLayout horizontalAlignment="center"  orientation="horizontal">
+          <Label horizontalAlignment="center"  class="lblPath" [text] ="'PATH' | translate" ></Label>
+          <Label horizontalAlignment="center"  class="volPath" [text]="vol.path"></Label>
+        </StackLayout>
+        <StackLayout horizontalAlignment="center"  orientation="horizontal">
+          <Label horizontalAlignment="center"  class="lblType" [text] ="'TYPE' | translate"></Label>
+          <Label horizontalAlignment="center"  class="volType" [text]="vol.type"></Label>
+        </StackLayout>
+      </StackLayout>
+    </StackLayout>
   </StackLayout>
 </StackLayout>

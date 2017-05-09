@@ -16,7 +16,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppComponent } from './app/components/app.component';
 import { AboutComponent } from './app/components/about/about.component';
 import { HomeComponent } from './app/components/home/home.component';
-import { NSGlobalComponent } from './app/components/gobal/global.component.tns';
+import { NSGlobalComponent } from './app/components/global/global.component.tns';
 
 // feature modules
 import { CoreModule } from './app/shared/core/core.module';

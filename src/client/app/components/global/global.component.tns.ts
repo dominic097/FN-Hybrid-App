@@ -3,10 +3,9 @@
  */
 
 
-import {Component, ElementRef, ViewChild, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {GlobalService} from '../../shared/core/services/index';
 import {GlobalConfig} from './global.component.config';
-import {SegmentedBarItem} from 'tns-core-modules/ui/segmented-bar';
 
 
 @Component({
@@ -16,10 +15,10 @@ import {SegmentedBarItem} from 'tns-core-modules/ui/segmented-bar';
   styleUrls: ['global.component.css']
 })
 export class NSGlobalComponent implements OnInit {
-  private FNVolDsk = [];
-  private FNInfo = [];
+  private FNVolDsk: Array<any> = [];
+  private FNVolDskInfo: Array<any> = [];
+  private FNInfo: Array<any> = [];
   private isLoading = true;
-  private lblProp = 'test';
 
   ngOnInit() {
     this.loadFNInfo();
@@ -33,12 +32,11 @@ export class NSGlobalComponent implements OnInit {
       .subscribe(
         data => {
           this.FNInfo = data;
-          this.FNVolDsk = [];
           this.FNInfo.forEach((fn) => {
             this.FNVolDsk.push({title: fn.name});
+            this.segmentedBarselectionChange(0);
             this.isLoading = false;
           });
-          console.log(JSON.stringify(this.FNVolDsk));
         },
         err => {
           console.log(err);
@@ -48,6 +46,9 @@ export class NSGlobalComponent implements OnInit {
   }
 
   segmentedBarselectionChange(e) {
-    console.log(JSON.stringify(e));
+    let _FNVol = this.FNInfo[e].children[0] || [];
+    if (_FNVol['type'] === 'dataset' && _FNVol['children'].length > 0) {
+      this.FNVolDskInfo = _FNVol['children'];
+    }
   }
 }

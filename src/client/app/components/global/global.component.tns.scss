@@ -1,3 +1,30 @@
 .globalHeader {
   color: #00ee56;
 }
+
+.CardStyle {
+  margin-top: 20px;
+}
+
+.volLstwrapper {
+  width: 80%;
+  border-radius: 5px ;
+  margin: 10px;
+  padding: 30% 0;
+}
+
+.volName {
+  margin: 5%;
+}
+
+.volName, .lblPath, .lblType {
+  font-weight: 700;
+}
+
+.volPath, .volType {
+  margin-left: 2% ;
+}
+
+.volName {
+  font-style: italic;
+}
