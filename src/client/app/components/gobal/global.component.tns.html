@@ -1,0 +1,8 @@
+<StackLayout>
+  <ActivityIndicator row="1" *ngIf="isLoading" class="activity-indicator" width="100" height="100" #activityIndicator
+                     busy="{{ isLoading }}"></ActivityIndicator>
+  <StackLayout *ngIf="!isLoading">
+    <SegmentedBar class="m-5" #sb [items]="FNVolDsk" (selectedIndexChange)="segmentedBarselectionChange(sb.selectedIndex)"></SegmentedBar>
+    <Label [text]="lblProp" textWrap="true" vertical-align="center" class="h2 p-15 text-center"></Label>
+  </StackLayout>
+</StackLayout>

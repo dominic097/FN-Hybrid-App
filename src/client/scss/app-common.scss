@@ -1,0 +1,118 @@
+/**
+ * Created by Dominic on 28-02-2017.
+ */
+
+html {
+  height: 100%;
+  //overflow-y: scroll;
+}
+
+body {
+  overflow: auto;
+  height: 100%;
+}
+
+.flLeft {
+  float: left;
+}
+
+.flRight {
+  float: right;
+}
+
+.hide {
+  display: none;
+}
+
+ul {
+  list-style: none;
+}
+
+.logo {
+  width: 80px;
+  height: 30px;
+  margin: 0 2%;
+}
+
+.draggable, .draggable header {
+ cursor: move;
+}
+
+.sandbox-iframe {
+  height: 96% !important;
+}
+
+/** common css for Dialog window */
+
+.dialog--header {
+  width: 100%;
+  height: 32px;
+  border-bottom: 1px solid $dialog-border-color;
+  background-color: $dialog-border-color; //older browser
+  text-transform: capitalize;
+}
+
+.dialog--header label {
+  padding: 10px;
+}
+
+.dialog--close {
+  font-weight: 400;
+  display: inline-block;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.dialog--body {
+  width: 100%;
+  background: $dialog-bgColor;
+}
+
+.dialog--footer {
+  width: 100%;
+  height: 42px;
+  background-color: $dialog-border-color;
+}
+
+.dialog--footer button {
+  margin: 10px;
+}
+
+.grid--wrapper{
+  width:inherit;height: inherit;
+}
+
+.layout-content {
+  width: 100%;
+  margin: 0 auto;
+
+  //Temporary not to pushed to Prod
+  //width: 560px;
+  //height: 486px;
+  //-------------------------
+}
+
+
+/** Performance Chart common class */
+
+
+.performanceInfo--timeFrame {
+  position: absolute;
+  top: 10%;
+  left: 12%;
+  width: 12%;
+}
+
+.performanceInfo--areaChart {
+  width: 80%;
+  margin: 5% 0 0 8%;
+}
+
+section.grayOutFullBody, div.grayOutFullBody {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(230, 230, 230, 0.48);
+}
