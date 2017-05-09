@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { Http } from '@angular/http';
 
-
 // libs
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -88,7 +87,7 @@ if (String('<%= BUILD_TYPE %>') === 'dev') {
     StoreModule.provideStore(AppReducer),
     DEV_IMPORTS,
     EffectsModule.run(MultilingualEffects),
-    EffectsModule.run(NameListEffects),
+    EffectsModule.run(NameListEffects)
   ],
   declarations: [
     APP_COMPONENTS

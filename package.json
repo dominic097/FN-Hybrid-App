@@ -51,7 +51,6 @@
     "start.ios.device": "npm run nativescript-install && gulp build.tns && concurrently --kill-others 'gulp build.tns.watch' 'cd nativescript && tns run ios'",
     "start.android": "npm run nativescript-install && gulp build.tns && concurrently --kill-others \"gulp build.tns.watch\" \"cd nativescript && tns livesync android --emulator\"",
     "start.android.device": "npm run nativescript-install && gulp build.tns && concurrently --kill-others \"gulp build.tns.watch\" \"cd nativescript && tns run android\"",
-    "start.android.debug": "npm run nativescript-install && gulp build.tns && concurrently --kill-others \"gulp build.tns.watch\" \"cd nativescript && tns debug android --debug-brk\"",
     "tasks.list": "gulp --tasks-simple --color",
     "test": "gulp test --color",
     "e2e.ci": "gulp build.prod --color && gulp build.e2e --color && gulp e2e --color",
@@ -172,10 +171,9 @@
     "@angular/animations": "^4.0.0",
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
-    "@angular/core": "^4.1.1",
+    "@angular/core": "^4.0.0",
     "@angular/forms": "^4.0.0",
     "@angular/http": "^4.0.0",
-    "@angular/material": "^2.0.0-beta.3",
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
@@ -185,10 +183,6 @@
     "@ngrx/store": "^2.2.1",
     "@ngx-translate/core": "^6.0.1",
     "@ngx-translate/http-loader": "0.0.3",
-    "ag-grid": "^9.0.3",
-    "ag-grid-angular": "^9.0.3",
-    "angular-animate": "^1.6.4",
-    "angular-material": "^1.1.4",
     "angulartics2": "^1.6.4",
     "core-js": "^2.4.1",
     "es-module-loader": "^1.0.0",
@@ -198,7 +192,6 @@
     "reflect-metadata": "^0.1.8",
     "rxjs": "~5.2.0",
     "systemjs": "0.19.41",
-    "tns-core-modules": "^3.0.0",
     "zone.js": "^0.8.4"
   }
 }

@@ -13,7 +13,7 @@
       "data": ["node_modules/tns-core-modules/data"],
       "fetch": ["node_modules/tns-core-modules/fetch"],
       "trace": ["node_modules/tns-core-modules/trace"],
-      "tns": ["node_modules/tns-core-modules/fps-meter"],
+      "fps-meter": ["node_modules/tns-core-modules/fps-meter"],
       "color": ["node_modules/tns-core-modules/color"],
       "application-settings": ["node_modules/tns-core-modules/application-settings"],
       "http": ["node_modules/tns-core-modules/http"],
