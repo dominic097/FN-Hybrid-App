@@ -1,0 +1,52 @@
+/**
+ * Created by Dominic on 5/9/2017.
+ */
+
+
+.nav {
+  //transform:  translate3d(-100%, 0, 0);
+  width: 0px;
+  opacity: 0;
+  transition: width 5s, opacity;
+  separator-color: royalblue;
+}
+
+.nav.open {
+  width: 30%;
+  opacity: 1;
+}
+
+.nav.close {
+  width: 0px;
+  opacity: 0;
+}
+
+.navBtn.active {
+  border-bottom-color: skyblue;
+  border-bottom-width: 2;
+}
+
+.navBtn {
+  background-color: whitesmoke;
+}
+
+.nav.active {
+  border-bottom: 1px solid dodgerblue;
+}
+
+Button.chatBtn {
+  padding: 5px;
+  margin: 5px;
+  background-color: dodgerblue;
+  color: white;
+  height: 40px;
+  border-radius: 5;
+  border-bottom-width: 2;
+  border-bottom-color: cornflowerblue;
+}
+
+ListView.chat {
+  separator-color: white;
+}
+
+

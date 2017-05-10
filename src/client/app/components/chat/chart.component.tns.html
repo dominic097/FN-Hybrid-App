@@ -1,0 +1,21 @@
+<DockLayout #chatPage height="100%">
+  <ListView height="450px" dock="top" class="chat" padding="5px" #list [items]="chats">
+    <ng-template let-item="item">
+      <GridLayout columns="*" rows="auto" class="msg">
+      <StackLayout [class]="filter(item.from)" orientation="horizontal" [horizontalAlignment]="align(item.from)">
+        <Label [text]='item.message' class="msg_text" textWrap="true" verticalAlignment="top"></Label>
+        <Image [visibility]="showImage(item.from)" class="authorimg" stretch="aspectFill" height="30" width="30"
+               verticalAlignment="top" src="https://avatars1.githubusercontent.com/u/6422482?v=3&s=400" col="1"></Image>
+      </StackLayout>
+      </GridLayout>
+    </ng-template>
+  </ListView>
+  <StackLayout #chatbox height='10%' dock="bottom" class="chatBox">
+    <GridLayout columns="*,auto" style="padding: 10" verticalAlignment="bottom">
+      <TextField #textfield class="chatTextField" row="0" col="0" [(ngModel)]="message"></TextField>
+      <Button #btn class="chatBtn" row="0" col="1" text="send" (tap)=chat(message)></Button>
+    </GridLayout>
+  </StackLayout>
+</DockLayout>
+
+<!--D:\workspace\FN-Hybrid-App\src\client\assets\bot.png-->

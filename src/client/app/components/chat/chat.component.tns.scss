@@ -1,0 +1,50 @@
+/**
+ * Created by Dominic on 5/10/2017.
+ */
+
+
+
+.msg {
+  font-size: 14;
+  padding: 5;
+}
+
+.me .msg_text {
+  background-color: #30A9FF;
+  color: white;
+  padding: 8px;
+  margin-right: 10px;
+  border-radius: 5px;
+
+}
+
+.them .msg_text {
+  background-color: #e0e0e0;
+  color: #333;
+  padding: 7px;
+  border-radius: 5px;
+  margin-right: 40px;
+}
+
+.authorimg {
+  margin: 0 5px 5px 5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 15;
+}
+
+.chatTextField {
+  padding: 5;
+  background-color: white;
+  border-radius: 4;
+}
+
+.chat {
+  margin-bottom: 10;
+  background-color: whitesmoke;
+  separator-color: white;
+}
+
+.chatBox {
+}
+

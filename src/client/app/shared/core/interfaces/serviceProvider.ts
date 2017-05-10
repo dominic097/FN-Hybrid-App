@@ -5,9 +5,9 @@
 
 
 export  interface ServiceProvider {
-  url: string,
-  type: string,
-  contentType: string,
-  payLoad?: any
-  cb?: {(success:any, error:any) : any}
+  url: string;
+  type: string;
+  contentType: string;
+  payLoad?: any;
+  cb?: {(success:any, error:any) : any};
 }
