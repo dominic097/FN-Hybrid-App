@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1027520099120",
+    "firebase_url": "https://fn-cloud-mess.firebaseio.com",
+    "project_id": "fn-cloud-mess",
+    "storage_bucket": "fn-cloud-mess.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1027520099120:android:57710297099ca8d6",
+        "android_client_info": {
+          "package_name": "com.yourdomain.nativescript"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1027520099120-8vt7okas31rnq7v9ciku8gqq4tr1gj31.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOcZ9mzScXS4dXD3fmkU_bwg8p4KJFw6s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

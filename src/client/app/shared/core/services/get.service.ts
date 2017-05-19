@@ -15,7 +15,7 @@ export class GetReq {
 
   }
 
-  send(config: ServiceProvider, head: Headers) {
+  send(config: ServiceProvider, head?: Headers) {
     if(!head)
       head = new Headers();
     return this.http.get(config.url, {headers:head})

@@ -47,7 +47,7 @@ export class NSGlobalComponent implements OnInit {
 
   segmentedBarselectionChange(e) {
     let _FNVol = this.FNInfo[e].children[0] || [];
-    if (_FNVol['type'] === 'dataset' && _FNVol['children'].length > 0) {
+    if (_FNVol['type'] === 'dataset' && _FNVol['children'] && _FNVol['children'].length > 0) {
       this.FNVolDskInfo = _FNVol['children'];
     }
   }

@@ -7,6 +7,7 @@ import { AppService } from './app.service';
 import { GetReq } from './get.service';
 import { GlobalService } from './global.service';
 import { LoaderService } from './loader.service';
+import { BotService } from './bot/bot.service';
 
 export const CORE_PROVIDERS: any[] = [
   AppService,
@@ -16,7 +17,8 @@ export const CORE_PROVIDERS: any[] = [
   WindowService,
   GetReq,
   GlobalService,
-  LoaderService
+  LoaderService,
+  BotService
 ];
 
 export * from './app.service';
@@ -27,3 +29,4 @@ export * from './window.service';
 export * from './get.service';
 export * from './global.service';
 export * from './loader.service';
+export * from './bot/bot.service';

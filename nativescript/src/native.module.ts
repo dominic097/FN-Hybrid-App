@@ -10,12 +10,14 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/cor
 // libs
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+const pushPlugin = require("nativescript-push-notifications");
+import * as app from 'application';
+import {RouterExtensions} from "nativescript-angular/router";
 
 // app
 import {
   WindowService,
   ConsoleService,
-  RouterExtensions,
   AppService
 } from './app/shared/core/index';
 import { AppComponent } from './app/components/app.component';
@@ -77,4 +79,29 @@ MultilingualService.SUPPORTED_LANGUAGES = AppConfig.SUPPORTED_LANGUAGES;
   ],
   bootstrap: [AppComponent]
 })
-export class NativeModule { }
+export class NativeModule {
+  constructor(){
+    app.on(app.launchEvent, (args: app.ApplicationEventData) => {
+      if (args.android ) {
+        pushPlugin.register({senderID: '1027520099120'}, function (data) {
+          console.log("register \n");
+          console.log(data);
+          // self.set("message", "" + JSON.stringify(data));
+        }, function () {
+        });
+
+        pushPlugin.onMessageReceived(function callback(mess, data) {
+          console.log("Mess received \n");
+          console.log(data);
+          // self.set("message", "" + JSON.stringify(data));
+        });
+
+        pushPlugin.areNotificationsEnabled(function(areEnabled) {
+          console.log('\n Are Notifications enabled: ' + areEnabled);
+        });
+      }
+    });
+
+
+  }
+}

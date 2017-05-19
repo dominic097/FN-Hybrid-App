@@ -4,5 +4,9 @@ export const ChatRoutes: Array<any> = [
   {
     path: 'chat',
     component: ChatComponent
+  },
+  {
+    path: 'chat/:payload',
+    component: ChatComponent
   }
 ];
