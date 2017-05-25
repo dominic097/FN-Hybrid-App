@@ -8,6 +8,8 @@ import { GetReq } from './get.service';
 import { GlobalService } from './global.service';
 import { LoaderService } from './loader.service';
 import { BotService } from './bot/bot.service';
+import { DSService } from './bot/bot.DSOps';
+import { volumeService } from './bot/bot.volumeOps';
 
 export const CORE_PROVIDERS: any[] = [
   AppService,
@@ -18,7 +20,9 @@ export const CORE_PROVIDERS: any[] = [
   GetReq,
   GlobalService,
   LoaderService,
-  BotService
+  BotService,
+  DSService,
+  volumeService
 ];
 
 export * from './app.service';
@@ -30,3 +34,5 @@ export * from './get.service';
 export * from './global.service';
 export * from './loader.service';
 export * from './bot/bot.service';
+export * from './bot/bot.DSOps';
+export * from './bot/bot.volumeOps';

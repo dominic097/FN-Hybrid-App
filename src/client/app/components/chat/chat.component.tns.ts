@@ -6,16 +6,18 @@ import {Component, OnInit, AfterViewInit, ViewChild, ElementRef} from '@angular/
 import {ChatInterface} from '../../shared/core/interfaces/index';
 import {ListView} from 'tns-core-modules/ui/view';
 import {TextField} from 'tns-core-modules/ui/text-field';
-import {BotService} from '../../shared/core/services/bot/bot.service';
+import {BotService, volumeService, DSService} from '../../shared/core/services/index';
+import {iZVolumeCreate, DSCreate, iVolumeCreate, iZVolumeEdit} from '../../shared/core/interfaces/index';
 import {ChatConfig} from './chat.component.config';
 import {ActivatedRoute} from '@angular/router';
+
 
 @Component({
   moduleId: module.id,
   selector: 'chat-window',
   templateUrl: 'chart.component.html',
   styleUrls: ['chat.component.css'],
-  providers: [BotService]
+  providers: [BotService, volumeService, DSService]
 })
 export class ChatComponent implements OnInit {
 
@@ -47,16 +49,17 @@ export class ChatComponent implements OnInit {
     this.lstView = this.lv.nativeElement;
     this.txtField = this.tf.nativeElement;
     this._paramSubcription = this._activatedRoute.params.subscribe(params => {
-      routParams = params;
-      console.log(JSON.stringify(routParams))
-      if (routParams.hasOwnProperty('message'))
-        this.chat(routParams.message);
+      if (params.hasOwnProperty('payload'))
+        this.chat(params.payload + '', true);
       else
         this.chat('hi', true);
     });
   }
 
-  constructor(private service: BotService, private _activatedRoute: ActivatedRoute) {
+  constructor(private bService: BotService,
+              private vService: volumeService,
+              private dsService: DSService,
+              private _activatedRoute: ActivatedRoute) {
   }
 
   resetContext() {
@@ -140,8 +143,8 @@ export class ChatComponent implements OnInit {
       });
 
     this.txtField.text = '';
-    chatServiceProvider.url = chatServiceProvider.url.replace('$mess', this.context.isDirty ? this.botRsp.best.intent + message : message);
-    this.service.getBotResponse(chatServiceProvider).subscribe(
+    chatServiceProvider.url = chatServiceProvider.url.replace('$mess', this.context.isDirty ? this.botRsp.best.intent + ":" + this.context.contextObjKey + " " + message : message);
+    this.bService.getBotResponse(chatServiceProvider).subscribe(
       data => {
         console.log(data);
         if (data.best) {
@@ -194,12 +197,68 @@ export class ChatComponent implements OnInit {
   analyseBotResponse(res) {
     if (res.best.intent === "create:zvol") {
       console.log("create:zol in progress");
+      let _payload: iZVolumeCreate = {
+        'name': res.best.values['name'],
+        'volsize': res.best.values['size'] + res.best.values['unit']
+      };
+      ChatConfig.createZVolServiceProvider.url = ChatConfig.createZVolServiceProvider.url.replace('$volumeName', res.best.values['volumeName']);
+      this.vService.createZVolume(_payload, ChatConfig.createZVolServiceProvider).subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
     }
     else if (res.best.intent === "create:vol") {
       console.log("create:vol in progress");
+      let _payload: iVolumeCreate = {
+        'volume_name': res.best.values['name'],
+        'layout': [{
+          "vdevtype": res.best.values['type'],
+          "disks": res.best.values['disk'].split(',')
+        }]
+      };
+      this.vService.createVolume(_payload, ChatConfig.createVolServiceProvider).subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
     }
-    else  if (res.best.intent === "create:Dataset") {
+    else if (res.best.intent === "create:Dataset") {
       console.log("create:Dataset in progress");
+      let _payload: DSCreate = {
+        'name': res.best.values['name']
+      };
+      ChatConfig.createDSServiceProvider.url = ChatConfig.createDSServiceProvider.url.replace('$volumeName', res.best.values['volumeName']);
+      this.dsService.createDSVolume(_payload, ChatConfig.createDSServiceProvider).subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    }
+    else if (res.best.intent === "edit:ZvolSize") {
+      console.log("edit:ZvolSize in progress");
+      let _payload: iZVolumeEdit = {
+        'volsize': res.best.values['size'] + res.best.values['unit']
+      };
+      ChatConfig.editZVolServiceProvider.url = ChatConfig.editZVolServiceProvider.url.replace('$volumeName', res.best.values['volumeName']);
+      ChatConfig.editZVolServiceProvider.url = ChatConfig.editZVolServiceProvider.url.replace('$zname', res.best.values['name']);
+      this.vService.editZVolume(_payload, ChatConfig.editZVolServiceProvider).subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
     }
   }
 }

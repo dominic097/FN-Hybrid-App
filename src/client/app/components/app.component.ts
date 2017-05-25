@@ -38,15 +38,15 @@ export class AppComponent implements AfterContentInit {
       if (args.android) {
         var act = args.android;
         var intent = act.getIntent();
-        if (intent.get)
-          extras = intent.getExtras().get('payload') || false;
+        if (intent.getExtras)
+          extras = intent.getExtras().get('message') || false;
       }
     });
   }
 
   ngAfterContentInit() {
     if (extras) {
-      this.routerExtensions.navigate(["/chat", JSON.stringify(extras)]);
+      this.routerExtensions.navigate(["/chat", extras]);
     }
   }
 

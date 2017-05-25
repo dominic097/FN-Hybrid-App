@@ -6,13 +6,18 @@ import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/map'
 
 import {PostReq} from "../post.service";
-import {ServiceProvider, iZVolumeCreate, iVolumeCreate, DSCreate} from "../../interfaces/index";
+import {ServiceProvider, iZVolumeCreate, iVolumeCreate, iZVolumeEdit} from "../../interfaces/index";
 
 
 @Injectable()
 export class volumeService extends PostReq{
 
   createZVolume(zvol: iZVolumeCreate, serviceProvider: ServiceProvider) {
+    serviceProvider.payLoad = zvol;
+    return this.send(serviceProvider);
+  }
+
+  editZVolume(zvol: iZVolumeEdit, serviceProvider: ServiceProvider) {
     serviceProvider.payLoad = zvol;
     return this.send(serviceProvider);
   }

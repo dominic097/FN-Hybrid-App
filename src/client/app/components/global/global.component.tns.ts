@@ -21,7 +21,9 @@ export class NSGlobalComponent implements OnInit {
   private isLoading = true;
 
   ngOnInit() {
-    this.loadFNInfo();
+    setTimeout(()=> {
+      this.loadFNInfo();
+    },5000);
   }
 
   constructor(private el: ElementRef, private service: GlobalService) {
@@ -31,6 +33,7 @@ export class NSGlobalComponent implements OnInit {
     this.service.getFNInfo(GlobalConfig.fnServiceProvider)
       .subscribe(
         data => {
+          console.log(data);
           this.FNInfo = data;
           this.FNInfo.forEach((fn) => {
             this.FNVolDsk.push({title: fn.name});

@@ -93,7 +93,6 @@ export class NativeModule {
         pushPlugin.onMessageReceived(function callback(mess, data) {
           console.log("Mess received \n");
           console.log(data);
-          // self.set("message", "" + JSON.stringify(data));
         });
 
         pushPlugin.areNotificationsEnabled(function(areEnabled) {

@@ -15,10 +15,10 @@ export class PostReq {
   }
 
   send(config:ServiceProvider) {
-    let headers = new Headers();
-    headers.append('Content-Type', config.contentType);
-    headers.append('Authorization', "Basic cm9vdDpNc3lzQDEyMw==");
-    return this.http.post(config.url, JSON.stringify(config.payLoad), headers)
+    let _headers = new Headers();
+    _headers.append('Content-Type', config.contentType);
+    _headers.append('Authorization', "Basic cm9vdDpNc3lzQDEyMw==");
+    return this.http.post(config.url, config.payLoad, {headers: _headers})
       .map((response: Response) => response.json())
       .catch((error:any) => Observable.throw(error || 'Server error'));
   }

@@ -4,8 +4,8 @@
 
 export interface iZVolumeCreate {
   'name': string;
-  'avail': number;
-  'compression': string;
+  'avail'?: number;
+  'compression'?: string;
   'volsize': number;
 }
 
