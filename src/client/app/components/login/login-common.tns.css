@@ -13,7 +13,9 @@
 
 /* TODO: Assigning explicit heights and applying this margin shouldn’t be necessary. */
 .initial-container {
-  margin-top: 170;
+  margin-top: 150;
+  width: 100%;
+  height: 435;
 }
 .initial-logo {
   horizontal-align: center;
