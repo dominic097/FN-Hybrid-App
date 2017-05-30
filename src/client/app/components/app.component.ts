@@ -6,6 +6,7 @@ import {Component, AfterContentInit} from '@angular/core';
 import {SwipeGestureEventData} from 'tns-core-modules/ui/gestures';
 import {RouterExtensions} from "nativescript-angular/router";
 import * as app from 'application';
+import * as tnsOAuthModule from 'nativescript-oauth';
 
 // app
 import {AnalyticsService} from '../shared/analytics/index';
@@ -45,6 +46,7 @@ export class AppComponent implements AfterContentInit {
   }
 
   ngAfterContentInit() {
+
     if (extras) {
       this.routerExtensions.navigate(["/chat", extras]);
     }

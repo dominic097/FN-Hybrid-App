@@ -18,6 +18,7 @@ import { AboutComponent } from './app/components/about/about.component';
 import { HomeComponent } from './app/components/home/home.component';
 import { NSGlobalComponent } from './app/components/global/global.component.tns';
 import { ChatComponent } from './app/components/chat/chat.component.tns';
+import { LoginComponent } from './app/components/login/login.component.tns';
 
 // feature modules
 import { CoreModule } from './app/shared/core/core.module';
@@ -49,7 +50,8 @@ import { ConsoleService, ConsoleTarget, LogLevel } from './app/shared/core/index
     HomeComponent,
     AboutComponent,
     NSGlobalComponent,
-    ChatComponent
+    ChatComponent,
+    LoginComponent
   ],
   schemas: [
     NO_ERRORS_SCHEMA,

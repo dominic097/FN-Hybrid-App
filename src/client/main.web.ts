@@ -38,3 +38,7 @@ if (String('<%= BUILD_TYPE %>') === 'prod' || String('<%= TARGET_DESKTOP_BUILD %
 //     .catch((err: any) =>
 //       console.log('ServiceWorker registration failed: ', err));
 // }
+
+// Client ID:	81b04j6ndos3l6
+//
+// Client Secret:	PH2r0K7X8f7s4zs1
