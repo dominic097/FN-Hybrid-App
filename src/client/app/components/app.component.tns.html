@@ -1,14 +1,14 @@
 <DockLayout>
   <StackLayout class= '{{ menuOpen ? "nav open" : "nav close" }}'  dock="left">
-    <Button (tab) = "closeMenu()" nsRouterLink="/" [text]="'GLOBAL' | translate" class="navBtn action-item active" width="100%"></Button>
+    <Button (tab) = "closeMenu()" nsRouterLink="/global" [text]="'GLOBAL' | translate" class="navBtn action-item active" width="100%"></Button>
     <Button (tab) = "closeMenu()" nsRouterLink="/home" [text]="'HOME' | translate" class="navBtn action-item" width="100%"></Button>
     <Button (tab) = "closeMenu()" nsRouterLink="/about" [text]="'ABOUT' | translate" class="navBtn action-item" width="100%"></Button>
     <Button (tab) = "closeMenu()" nsRouterLink="/chat" [text]="'CHAT' | translate" class="navBtn action-item" width="100%"></Button>
   </StackLayout>
   <StackLayout dock="left" class="p-0 m-0">
-    <ActionBar title="Angular Seed Advanced" (swipe)="onSwipe($event)" class="action-bar">
-      <ActionItem nsRouterLink="/about" ios.position="right" android.position="popup">
-        <Button [text]="'ABOUT' | translate" class="action-item"></Button>
+    <ActionBar title="FN Storage" (swipe)="onSwipe($event)" class="action-bar">
+      <ActionItem nsRouterLink="/global" ios.position="right" android.position="popup">
+        <Button [text]="'HOME' | translate" class="action-item"></Button>
       </ActionItem>
     </ActionBar>
     <lang-switcher></lang-switcher>

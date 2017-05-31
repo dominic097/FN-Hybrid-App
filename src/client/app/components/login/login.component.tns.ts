@@ -79,6 +79,7 @@ export class LoginComponent implements OnInit {
           console.log(data);
           if(data.status) {
             this.isAuthenticating = false;
+            this.page.actionBarHidden = false;
             this.router.navigate(["/global"]);
           }
         },
@@ -89,7 +90,6 @@ export class LoginComponent implements OnInit {
         }
       );
   }
-
 
   // signUp() {
   //   if (getConnectionType() === connectionType.none) {
@@ -184,3 +184,4 @@ export class LoginComponent implements OnInit {
     });
   }
 }
+

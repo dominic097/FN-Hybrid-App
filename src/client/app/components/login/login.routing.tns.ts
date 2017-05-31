@@ -4,7 +4,6 @@ import { Routes, RouterModule } from "@angular/router";
 import { LoginComponent } from "./login.component.tns";
 
 export const loginRoutes: Routes = [
-  { path: "login", component: LoginComponent },
   { path: "", component: LoginComponent }
 ];
-export const loginRouting: ModuleWithProviders = RouterModule.forChild(loginRoutes);
+
