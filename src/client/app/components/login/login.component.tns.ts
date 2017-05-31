@@ -1,13 +1,15 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
-import { Router } from "@angular/router";
-import { Color } from "color";
-import { connectionType, getConnectionType } from "connectivity";
-import { Animation } from "ui/animation";
-import { View } from "ui/core/view";
-import { prompt } from "ui/dialogs";
-import { Page } from "ui/page";
+import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
+import {Router} from "@angular/router";
+import {Color} from "color";
+import {connectionType, getConnectionType} from "connectivity";
+import {Animation} from "ui/animation";
+import {View} from "ui/core/view";
+import {prompt} from "ui/dialogs";
+import {Page} from "ui/page";
+import * as dialogsModule from "ui/dialogs";
+import {loginConfig} from './login.component.config'
 
-import {  LoginService, User } from "../../shared/core/services";
+import {LoginService, User} from "../../shared/core/services/index";
 
 
 @Component({
@@ -15,6 +17,7 @@ import {  LoginService, User } from "../../shared/core/services";
   moduleId: module.id,
   templateUrl: "./login.component.html",
   styleUrls: ["./login-common.css", "./login.component.css"],
+  providers: [LoginService]
 })
 export class LoginComponent implements OnInit {
   user: User;
@@ -29,9 +32,17 @@ export class LoginComponent implements OnInit {
   @ViewChild("password") password: ElementRef;
 
   constructor(private router: Router,
-    private userService: LoginService,
-    private page: Page) {
+              private userService: LoginService,
+              private page: Page) {
     this.user = new User();
+  }
+
+  dalert(message: string) {
+    dialogsModule.alert({
+      title: "FN Storage",
+      okButtonText: "OK",
+      message: message
+    });
   }
 
   ngOnInit() {
@@ -44,7 +55,7 @@ export class LoginComponent implements OnInit {
 
   submit() {
     if (!this.user.isValidEmail()) {
-      // dalert("Enter a valid email address.");
+      this.dalert("Enter a valid email address.");
       return;
     }
 
@@ -52,72 +63,77 @@ export class LoginComponent implements OnInit {
     if (this.isLoggingIn) {
       this.login();
     } else {
-      this.signUp();
+      // this.signUp();
     }
   }
 
   login() {
     if (getConnectionType() === connectionType.none) {
-      // dalert("Groceries requires an internet connection to log in.");
+      this.dalert("Groceries requires an internet connection to log in.");
       return;
     }
 
-    this.userService.login(this.user)
+    this.userService.login(loginConfig.loginServiceProvider,  this.user)
       .subscribe(
-        () => {
-          this.isAuthenticating = false;
-          this.router.navigate(["/"]);
-        },
-        (error) => {
-          // dalert("Unfortunately we could not find your account.");
-          this.isAuthenticating = false;
-        }
-      );
-  }
-
-  signUp() {
-    if (getConnectionType() === connectionType.none) {
-      // dalert("Groceries requires an internet connection to register.");
-      return;
-    }
-
-    this.userService.register(this.user)
-      .subscribe(
-        () => {
-          // dalert("Your account was successfully created.");
-          this.isAuthenticating = false;
-          this.toggleDisplay();
-        },
-        (message) => {
-          // TODO: Verify this works
-          if (message.match(/same user/)) {
-            // dalert("This email address is already in use.");
-          } else {
-            // dalert("Unfortunately we were unable to create your account.");
+        data => {
+          console.log(data);
+          if(data.status) {
+            this.isAuthenticating = false;
+            this.router.navigate(["/global"]);
           }
+        },
+        err => {
+          console.log(err);
+          this.dalert("Unfortunately we could not find your account.");
           this.isAuthenticating = false;
         }
       );
   }
 
-  forgotPassword() {
-    prompt({
-      title: "Forgot Password",
-      message: "Enter the email address you used to register for Groceries to reset your password.",
-      defaultText: "",
-      okButtonText: "Ok",
-      cancelButtonText: "Cancel"
-    }).then((data) => {
-      if (data.result) {
-        this.userService.resetPassword(data.text.trim())
-          .subscribe(() => {
-            // dalert("Your password was successfully reset. Please check your email for instructions on choosing a new password.");
-          }, () => {
-            // dalert("Unfortunately, an error occurred resetting your password.");
-          });
-      }
-    });
-  }
+
+  // signUp() {
+  //   if (getConnectionType() === connectionType.none) {
+  //     this.dalert("Groceries requires an internet connection to register.");
+  //     return;
+  //   }
+  //
+  //   this.userService.register(this.user)
+  //     .subscribe(
+  //       () => {
+  //         this.dalert("Your account was successfully created.");
+  //         this.isAuthenticating = false;
+  //         this.toggleDisplay();
+  //       },
+  //       (message) => {
+  //         // TODO: Verify this works
+  //         if (message.match(/same user/)) {
+  //           this.dalert("This email address is already in use.");
+  //         } else {
+  //           this.dalert("Unfortunately we were unable to create your account.");
+  //         }
+  //         this.isAuthenticating = false;
+  //       }
+  //     );
+  // }
+  //
+  // forgotPassword() {
+  //   prompt({
+  //     title: "Forgot Password",
+  //     message: "Enter the email address you used to register for Groceries to reset your password.",
+  //     defaultText: "",
+  //     okButtonText: "Ok",
+  //     cancelButtonText: "Cancel"
+  //   }).then((data) => {
+  //     if (data.result) {
+  //       this.userService.resetPassword(data.text.trim())
+  //         .subscribe(() => {
+  //           this.dalert("Your password was successfully reset. Please check your email for instructions on choosing a new password.");
+  //         }, () => {
+  //           this.dalert("Unfortunately, an error occurred resetting your password.");
+  //         });
+  //     }
+  //   });
+  // }
 
   toggleDisplay() {
     this.isLoggingIn = !this.isLoggingIn;
@@ -130,7 +146,7 @@ export class LoginComponent implements OnInit {
 
   startBackgroundAnimation(background) {
     background.animate({
-      scale: { x: 1.0, y: 1.0 },
+      scale: {x: 1.0, y: 1.0},
       duration: 10000
     });
   }
@@ -147,7 +163,7 @@ export class LoginComponent implements OnInit {
     initialContainer.animate({
       opacity: 0,
       duration: 500
-    }).then(function() {
+    }).then(function () {
       // After the animation completes, hide the initial container and
       // show the main container and logo. The main container and logo will
       // not immediately appear because their opacity is set to 0 in CSS.
@@ -156,12 +172,12 @@ export class LoginComponent implements OnInit {
       logoContainer.style.visibility = "visible";
 
       // Fade in the main container and logo over one half second.
-      animations.push({ target: mainContainer, opacity: 1, duration: 500 });
-      animations.push({ target: logoContainer, opacity: 1, duration: 500 });
+      animations.push({target: mainContainer, opacity: 1, duration: 500});
+      animations.push({target: logoContainer, opacity: 1, duration: 500});
 
       // Slide up the form controls and sign up container.
-      animations.push({ target: signUpStack, translate: { x: 0, y: 0 }, opacity: 1, delay: 500, duration: 150 });
-      animations.push({ target: formControls, translate: { x: 0, y: 0 }, opacity: 1, delay: 650, duration: 150 });
+      animations.push({target: signUpStack, translate: {x: 0, y: 0}, opacity: 1, delay: 500, duration: 150});
+      animations.push({target: formControls, translate: {x: 0, y: 0}, opacity: 1, delay: 650, duration: 150});
 
       // Kick off the animation queue
       new Animation(animations, false).play();

@@ -4,15 +4,16 @@
 
 
 import {Injectable} from '@angular/core';
+import {ServiceProvider} from '../interfaces/index';
 import {Http, Headers, Response} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
-import {ServiceProvider} from '../interfaces/index';
+import 'rxjs/add/operator/catch';
+import 'rxjs/Rx';
 
 @Injectable()
 export class GetReq {
   constructor(private http: Http) {
-
   }
 
   send(config: ServiceProvider, head?: Headers) {

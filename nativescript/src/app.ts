@@ -8,14 +8,14 @@ import SocialLogin = require("nativescript-social-login");
 import { NativeModule } from './native.module';
 
 
-let linkedInInitOptions : tnsOAuthModule.ITnsOAuthOptionsLinkedIn = {
-  clientId: '81b04j6ndos3l6',
-  clientSecret: 'PH2r0K7X8f7s4zs1',
-  redirectUri: 'http://172.30.36.63:3000/login/',
-  scope: ['r_basicprofile'] //Leave blank and the default scopes will be used
-};
-
-tnsOAuthModule.initLinkedIn(linkedInInitOptions);
+// let linkedInInitOptions : tnsOAuthModule.ITnsOAuthOptionsLinkedIn = {
+//   clientId: '81b04j6ndos3l6',
+//   clientSecret: 'PH2r0K7X8f7s4zs1',
+//   redirectUri: 'http://172.30.36.63:3000/login/',
+//   scope: ['r_basicprofile'] //Leave blank and the default scopes will be used
+// };
+//
+// tnsOAuthModule.initLinkedIn(linkedInInitOptions);
 
 //
 // var facebookInitOptions : tnsOAuthModule.ITnsOAuthOptionsFacebook = {

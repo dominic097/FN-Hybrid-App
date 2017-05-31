@@ -44,4 +44,5 @@ export * from './bot/bot.DSOps';
 export * from './bot/bot.volumeOps';
 export * from './login.service';
 export * from './backend.service';
-export * from './user.model'
+export * from './user.model';
+export * from './auth-guard.service';

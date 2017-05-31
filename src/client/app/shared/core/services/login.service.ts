@@ -1,73 +1,75 @@
-import { Injectable } from "@angular/core";
-import { Http, Headers, Response } from "@angular/http";
-import { Observable } from "rxjs/Rx";
-import "rxjs/add/operator/do";
-import "rxjs/add/operator/map";
-import "rxjs/add/observable/throw";
-import "rxjs/add/operator/catch";
+import {Injectable} from '@angular/core';
+import {Headers, Http} from '@angular/http';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/Rx';
+import {ServiceProvider} from '../interfaces/index';
+import {GetReq} from './get.service';
+let CryptoJS = require("crypto-js");
+import {User} from "./user.model";
+var AES = require("crypto-js/aes");
+var SHA256 = require("crypto-js/sha256");
+let isAuthenticated = false;
 
-import { User } from "./user.model";
-import { BackendService } from "./backend.service";
 
 @Injectable()
-export class LoginService {
-  constructor(private http: Http) { }
+export class LoginService extends GetReq {
 
-  register(user: User) {
-    let headers = new Headers();
-    headers.append("Content-Type", "application/json");
-
-    return this.http.post(
-      // BackendService.apiUrl + "Users",
-      JSON.stringify({
-        Username: user.email,
-        Email: user.email,
-        Password: user.password
-      }),
-      { headers: headers }
-    )
-    .catch(this.handleErrors);
+  constructor(private http: Http) {
+    super();
   }
 
-  login(user: User) {
-    let headers = new Headers();
-    headers.append("Content-Type", "application/json");
+  readonly VERY_SECRET_CODE: string = 'd4DQ%@^FDHWEZ5ZXCUWcg43za==-3';
 
-    return this.http.post(
-      // BackendService.apiUrl + "oauth/token",
-      JSON.stringify({
-        username: user.email,
-        password: user.password,
-        grant_type: "password"
-      }),
-      { headers: headers }
-    )
-    .map(response => response.json())
-    .do(data => {
-      BackendService.token = data.Result.access_token;
-    })
-    .catch(this.handleErrors);
+  private _encryptData(data: string): string {
+    // we use the AES-256 encryption -> very secure
+    let cipherText = CryptoJS.AES.encrypt(data, this.VERY_SECRET_CODE);
+    return cipherText;
   }
 
-  logoff() {
-    BackendService.token = "";
+  // register(user: User) {
+  //   let headers = new Headers();
+  //   headers.append("Content-Type", "application/json");
+  //
+  // }
+
+  login(serviceProvider: ServiceProvider, user: User) {
+    var headers = new Headers();
+    serviceProvider.url = serviceProvider.url.replace('$email', user.email).replace('$pwd', SHA256(user.password));
+    let _sub = this.send(serviceProvider, headers);
+    _sub.subscribe(
+      data => {
+        if (data.status) {
+          isAuthenticated = true;
+        }
+      });
+
+    return _sub;
   }
 
-  resetPassword(email) {
-    let headers = new Headers();
-    headers.append("Content-Type", "application/json");
-
-    return this.http.post(
-      // BackendService.apiUrl + "Users/resetpassword",
-      JSON.stringify({
-        Email: email
-      }),
-      { headers: headers }
-    ).catch(this.handleErrors);
+  isAuthenticated() {
+    return isAuthenticated;
   }
 
-  handleErrors(error: Response) {
-    console.log(JSON.stringify(error.json()));
-    return Observable.throw(error);
-  }
+// logoff() {
+//   BackendService.token = "";
+// }
+
+// resetPassword(email) {
+//   let headers = new Headers();
+//   headers.append("Content-Type", "application/json");
+
+// return this.http.post(
+//   // BackendService.apiUrl + "Users/resetpassword",
+//   JSON.stringify({
+//     Email: email
+//   }),
+//   {headers: headers}
+// ).catch(this.handleErrors);
+// }
+
+// handleErrors(error: Response) {
+//   console.log(JSON.stringify(error.json()));
+//   return Observable.throw(error);
+// }
 }

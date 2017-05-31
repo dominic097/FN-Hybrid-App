@@ -6,7 +6,6 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {GlobalService} from '../../shared/core/services/index';
 import {GlobalConfig} from './global.component.config';
-import * as tnsOAuthModule from 'nativescript-oauth';
 
 
 @Component({
@@ -22,7 +21,6 @@ export class NSGlobalComponent implements OnInit {
   private isLoading = true;
 
   ngOnInit() {
-    tnsOAuthModule.login();
     this.loadFNInfo();
   }
 

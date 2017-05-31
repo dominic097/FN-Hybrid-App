@@ -21,7 +21,7 @@ import {
   AppService
 } from './app/shared/core/index';
 import { AppComponent } from './app/components/app.component';
-import { routes } from './app/components/app.routes.tns';
+import { routes, authProviders } from './app/components/app.routes.tns';
 
 // feature modules
 import { CoreModule } from './app/shared/core/core.module';
@@ -72,6 +72,7 @@ MultilingualService.SUPPORTED_LANGUAGES = AppConfig.SUPPORTED_LANGUAGES;
     NS_ANALYTICS_PROVIDERS,
     { provide: RouterExtensions, useClass: TNSRouterExtensions },
     { provide: AppService, useClass: NSAppService },
+    authProviders
   ],
   schemas: [
     NO_ERRORS_SCHEMA,
